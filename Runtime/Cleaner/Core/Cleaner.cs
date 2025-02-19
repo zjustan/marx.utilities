@@ -1,4 +1,4 @@
-namespace Marx.Utilities .Cleaner.Core
+namespace Marx.Utilities
 {
     public abstract class Cleaner<T> : ICleaner
     {

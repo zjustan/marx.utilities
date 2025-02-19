@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Marx.Utilities .Cleaner.Core;
 
-namespace Marx.Utilities .Factory.Core
+namespace Marx.Utilities
 {
 
     public class FactoryCollection : IEnumerable<object>

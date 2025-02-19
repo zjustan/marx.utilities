@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace Marx.Utilities .Factory.Core
+namespace Marx.Utilities
 {
 
     public static class Factories
