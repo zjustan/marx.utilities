@@ -1,0 +1,16 @@
+{
+    "name": "Marx.Utillities.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:cdea90affc30b824b95fe63294ea7a28"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
