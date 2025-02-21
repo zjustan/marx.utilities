@@ -4,9 +4,13 @@ namespace Marx.Utilities
 {
     public static class Float2Extensions
     {
-        public static float2 Cross(this float2 v)
+        /// <summary>
+        /// returns the perpendicular / cross direction of the direction, this vector will be facing to the left side
+        /// </summary>
+        /// <returns>(-input.y, input.x);</returns>
+        public static float2 Perpendicular(this float2 input)
         {
-            return new float2(-v.y, v.x);
+            return new float2(-input.y, input.x);
         }
 
     }

@@ -1,7 +1,7 @@
 {
-  "name": "com.floris-justin.marx-utillities",
+  "name": "com.floris-justin.marx-utilities",
   "version": "1.0.0",
-  "displayName": "marx utillities",
+  "displayName": "marx utilities",
   "description": "This is an example package",
   "unity": "2019.1",
   "unityRelease": "0b5",
