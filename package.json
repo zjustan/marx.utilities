@@ -12,6 +12,7 @@
     "url": "https://www.unity3d.com"
   },
   "dependencies": {
-    "com.unity.inputsystem": "1.7.0"
+    "com.unity.inputsystem": "1.7.0",
+    "com.unity.mathematics": "1.2.6"
   }
 }
