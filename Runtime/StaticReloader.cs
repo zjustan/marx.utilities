@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
@@ -30,25 +31,38 @@ namespace Marx.Utilities
 
 		private static void ReloadStaticFields()
 		{
-			//FIX: there should be a reverse search to get all the types / assemblies 
-			// this will not cause a problem for not bc we are only using one asmdef
-			foreach (Type item in typeof(StaticReloadAttribute).Assembly.GetTypes())
+			AssemblyName currentAssemblyName = typeof(StaticReloadAttribute).Assembly.GetName();
+			Assembly[] allAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+			IEnumerable<Assembly> targetAssemblies = allAssemblies
+				.Where(x => 
+					x.GetReferencedAssemblies().Any(y => AssemblyName.ReferenceMatchesDefinition(y, currentAssemblyName))).ToArray();
+			
+			foreach (Type item in targetAssemblies.SelectMany(x => x.GetTypes()))
 			{
 				foreach (FieldInfo field in item.GetFields(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public))
 				{
-					if (field.IsStatic && field.GetCustomAttribute<StaticReloadAttribute>() != null)
-					{
-						field.SetValue(null, null);
-						Debug.Log($"resetted: {item.Name}.{field.Name}");
-					}
+					if (field.GetCustomAttribute<StaticReloadAttribute>() == null) continue;
+					object value = CreateDefault(field.FieldType);
+					field.SetValue(null,value);
 				}
 
-				foreach (PropertyInfo property in item.GetProperties().Where(x => x.GetCustomAttribute<StaticReloadAttribute>() != null))
+				foreach (PropertyInfo property in item.GetProperties(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public))
 				{
-					property.SetValue(null, null);
-					Debug.Log($"resetted: {item.Name}.{property.Name}");
+					if (property.GetCustomAttribute<StaticReloadAttribute>() == null) continue;
+					object value = CreateDefault(property.PropertyType);
+					property.SetValue(null,value);
 				}
 			}
+		}
+
+		private static object CreateDefault(Type type)
+		{
+			if(type.GetConstructor(Type.EmptyTypes) != null && !type.IsAbstract)
+			{
+				return Activator.CreateInstance(type);
+			}
+
+			return null;
 		}
 	}
 }
