@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Marx.Utilities 
+namespace Marx.Utilities
 {
     public class ParticleDestroyAfterStop : MonoBehaviour
     {

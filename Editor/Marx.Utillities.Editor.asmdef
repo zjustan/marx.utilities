@@ -2,9 +2,12 @@
     "name": "Marx.Utillities.Editor",
     "rootNamespace": "",
     "references": [
-        "GUID:cdea90affc30b824b95fe63294ea7a28"
+        "GUID:cdea90affc30b824b95fe63294ea7a28",
+        "GUID:4057953914407574098041cae6ceccf5"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

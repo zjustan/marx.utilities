@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Marx.Utilities 
+namespace Marx.Utilities
 {
     public static class Trajectory
     {

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Marx.Utilities 
+namespace Marx.Utilities
 {
     public class CircularBuffer<T> : IEnumerable<T>
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Marx.Utilities 
+namespace Marx.Utilities
 {
     public class UIDropdownOption : MonoBehaviour, IPointerClickHandler
     {
@@ -12,7 +12,7 @@ namespace Marx.Utilities
         [SerializeField] protected Image activeToggle;
 
         private bool clickEnabled = false;
-        private UIDropdownRenderer renderer;
+        private new UIDropdownRenderer renderer;
         private Action onClick;
 
         public void Init(UIDropdownRenderer parent, DropdownOption option)

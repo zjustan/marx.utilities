@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Marx.Utilities 
+namespace Marx.Utilities
 {
     public class RandomPicker<T> where T : IEquatable<T>
     {

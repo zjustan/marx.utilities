@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Marx.Utilities 
+namespace Marx.Utilities
 {
 
     public class IdentifyableObject<T> : ScriptableObject, IEquatable<T> where T : IdentifyableObject<T>

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Marx.Utilities 
+namespace Marx.Utilities
 {
     public class UIDropdown : MonoBehaviour, IDropdown
     {

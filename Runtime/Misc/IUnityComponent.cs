@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Marx.Utilities 
+namespace Marx.Utilities
 {
 
     public interface IUnityComponent

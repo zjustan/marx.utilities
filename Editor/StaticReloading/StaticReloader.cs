@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
-using UnityEngine;
 
-namespace Marx.Utilities
+namespace Marx.Utilities.Editor
 {
 	/// <summary>
 	/// This class is responsible for resetting all static field and properties before starting play mode.
@@ -14,7 +13,7 @@ namespace Marx.Utilities
 	/// Make sure 'Enter Play Mode Options' is enabled and 'Reload Domain' is disabled. 
 	/// If 'Enter Play Mode Options' is disabled, a domain reload will happen regardless of whether 'Reload Domain' is disabled or enabled.
 	/// </summary>
-	[InitializeOnLoadAttribute]
+	[InitializeOnLoad]
 	public static class StaticReloader
 	{
 		static StaticReloader()
@@ -31,13 +30,7 @@ namespace Marx.Utilities
 
 		private static void ReloadStaticFields()
 		{
-			AssemblyName currentAssemblyName = typeof(StaticReloadAttribute).Assembly.GetName();
-			Assembly[] allAssemblies = AppDomain.CurrentDomain.GetAssemblies();
-			IEnumerable<Assembly> targetAssemblies = allAssemblies
-				.Where(x => 
-					x.GetReferencedAssemblies().Any(y => AssemblyName.ReferenceMatchesDefinition(y, currentAssemblyName))).ToArray();
-			
-			foreach (Type item in targetAssemblies.SelectMany(x => x.GetTypes()))
+			foreach (Type item in typeof(StaticReloadAttribute).Assembly.GetReferencingAssemblies().SelectMany(x => x.GetTypes()))
 			{
 				foreach (FieldInfo field in item.GetFields(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public))
 				{

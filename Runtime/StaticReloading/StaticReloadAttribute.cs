@@ -1,6 +1,6 @@
 using System;
 
-namespace Marx.Utilities 
+namespace Marx.Utilities
 {
     /// <summary>
     /// If domain reload is disabled, static fields and properties will not reset between playmodes.

@@ -2,7 +2,8 @@ using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace Marx.Utilities {
+namespace Marx.Utilities
+{
     public static class StringExtensions {
 
         public static bool IsNullOrEmpty(this string str) => string.IsNullOrEmpty(str);

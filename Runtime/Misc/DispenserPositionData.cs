@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Marx.Utilities 
+namespace Marx.Utilities
 {
     public enum DirectionSign { negative, positive, none }
     public enum DirectionAxis { x = 0, y = 2, none = -1 }

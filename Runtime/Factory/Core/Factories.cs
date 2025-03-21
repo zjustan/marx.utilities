@@ -7,6 +7,7 @@ using UnityEngine;
 namespace Marx.Utilities
 {
 
+    [Service]
     public static class Factories
     {
         static Dictionary<Type, Factory> factories
@@ -21,6 +22,7 @@ namespace Marx.Utilities
         static Dictionary<Type, Factory> factorieCache;
 
         private static Dictionary<object, FactoryCollection> factoryCollections = new();
+        
         public static FactoryCollection Collection(object obj)
         {
             if (factoryCollections.TryGetValue(obj, out FactoryCollection result))
@@ -107,6 +109,16 @@ namespace Marx.Utilities
             }
 
             return false;
+        }
+        
+        public static void Register(ServiceRegister register)
+        {
+            foreach (Factory factory in factories.Values)
+            {
+                Type factoryType = factory.GetType();
+                Type[] aliases = factoryType.GetInterfaces().Where(x => x.Implements<IFactory>()).Append(factoryType.BaseType).ToArray();
+                register.Bind(factoryType, aliases).AsSingleton().From(x => factory);
+            }
         }
 
     }

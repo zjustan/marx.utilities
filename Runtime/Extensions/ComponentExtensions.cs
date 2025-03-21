@@ -23,7 +23,7 @@ namespace Marx.Utilities
 
         public static bool TryGetComponentInParent<T>(this Component component, out T result)
         {
-            result = component.GetComponentInParent<T>();
+            result =component? component.GetComponentInParent<T>() : default;
             return result != null;
         }
     }

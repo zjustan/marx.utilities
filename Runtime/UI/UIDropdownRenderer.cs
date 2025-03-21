@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using Marx.Utilities;
-using Marx.Utilities ;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Marx.Utilities 
+namespace Marx.Utilities
 {
     public class UIDropdownRenderer : Singleton<UIDropdownRenderer>
     {

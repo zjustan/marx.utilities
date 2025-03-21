@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Marx.Utilities 
+namespace Marx.Utilities
 {
     public class DropdownOption
     {

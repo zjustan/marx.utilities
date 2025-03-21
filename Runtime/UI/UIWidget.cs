@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using UnityEngine;
 
-namespace Marx.Utilities 
+namespace Marx.Utilities
 {
     public class UIWidget : MonoBehaviour
     {

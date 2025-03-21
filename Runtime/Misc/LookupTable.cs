@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 
-namespace Marx.Utilities 
+namespace Marx.Utilities
 {
     public class LookupTable<TLeft, TRight>
     {
-        private List<lookupPair<TLeft, TRight>> items = new();
+        private List<LookupPair<TLeft, TRight>> items = new();
 
         public void Add(TLeft left, TRight right)
         {
@@ -18,7 +18,7 @@ namespace Marx.Utilities
                     throw new Exception($"{typeof(TRight).Name} on the right already exists in the lookup table");
             }
 
-            items.Add(new lookupPair<TLeft, TRight>
+            items.Add(new LookupPair<TLeft, TRight>
             {
                 LeftValue = left,
                 RightValue = right
@@ -44,7 +44,34 @@ namespace Marx.Utilities
             }
             throw new Exception($"{left} does not exist in the lookup table");
         }
-        public struct lookupPair<T, U>
+
+        public bool TryResolve(TLeft left, out TRight right)
+        {
+            right = default;
+            foreach (var item in items)
+            {
+                if (!Equals(item.LeftValue, left)) continue;
+                right = item.RightValue;
+                return true;
+            }
+
+            return false;
+        }
+        
+        public bool TryResolve(TRight right, out TLeft left)
+        {
+            left = default;
+            foreach (var item in items)
+            {
+                if (!Equals(item.RightValue, right)) continue;
+                left = item.LeftValue;
+                return true;
+            }
+
+            return false;
+        }
+        
+        private struct LookupPair<T, U>
         {
             public T LeftValue { get; set; }
             public U RightValue { get; set; }

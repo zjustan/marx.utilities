@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Marx.Utilities 
+namespace Marx.Utilities
 {
     public class UIScreenManager : MonoBehaviour
     {

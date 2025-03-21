@@ -9,8 +9,8 @@ using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Marx.Utilities {
-
+namespace Marx.Utilities
+{
     [AttributeUsage(AttributeTargets.Method)]
     [MeansImplicitUse]
     public class ButtonMethodAttribute : PropertyAttribute {
