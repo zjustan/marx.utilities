@@ -62,6 +62,11 @@ namespace Marx.Utilities
             return x.guid.Equals(y.guid);
         }
 
+        public override string ToString()
+        {
+            return guid.ToString();
+        }
+
         public int GetHashCode(SGuid obj)
         {
             return obj.guid.GetHashCode();

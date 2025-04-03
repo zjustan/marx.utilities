@@ -21,7 +21,7 @@ namespace Marx.Utilities
             get
             {
                 FillCache();
-                return LookupCache.Values;
+                return lookupCache.Values;
             }
         }
 
@@ -30,16 +30,32 @@ namespace Marx.Utilities
             get
             {
                 FillCache();
-                return LookupCache;
+                return lookupCache;
             }
 
         }
 
-        private static Dictionary<SGuid, T> LookupCache;
+        private static Dictionary<SGuid, T> lookupCache;
 
-        private static void FillCache()
+        private void OnEnable()
         {
-            LookupCache ??= Resources.LoadAll<T>("").ToDictionary(x => x.Guid, x => x);
+            if(lookupCache == null)
+                FillCache();
+        }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)] 
+        static void FillCache()
+        {
+            lookupCache ??= new();
+            lookupCache.Clear();
+            foreach (T obj in Resources.LoadAll<T>(""))
+            {
+                if (lookupCache.TryAdd(obj.Guid, obj)) continue;
+                
+                Debug.LogError($"Multiple objects sharing same GUID: {obj.Guid.ToString()}");
+                Debug.LogError($"Object 1: {obj.name}", obj);
+                Debug.LogError($"Object 2: {lookupCache[obj.Guid].name}",lookupCache[obj.Guid]);
+            }
         }
 
         public bool Equals(T other)
@@ -50,7 +66,7 @@ namespace Marx.Utilities
 
             return Guid.Equals(other.Guid);
         }
-
+        
         public static implicit operator SGuid(IdentifyableObject<T> @object) => @object.Guid;
     }
 
