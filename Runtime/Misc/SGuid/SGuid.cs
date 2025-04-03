@@ -59,12 +59,12 @@ namespace Marx.Utilities
 
         public bool Equals(SGuid x, SGuid y)
         {
-            return x.Equals(y);
+            return x.guid.Equals(y.guid);
         }
 
         public int GetHashCode(SGuid obj)
         {
-            return obj.GetHashCode();
+            return obj.guid.GetHashCode();
         }
     }
 
