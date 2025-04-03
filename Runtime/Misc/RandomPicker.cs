@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Marx.Utilities
 {
@@ -27,12 +28,20 @@ namespace Marx.Utilities
             T newValue;
             int newIndex;
 
+            int limit = 999;
+            
             do
             {
                 newIndex = UnityEngine.Random.Range(0, unpickedValues.Count);
                 newValue = unpickedValues[newIndex];
+                
             }
-            while (newValue.Equals(Value));
+            while (newValue.Equals(Value) || --limit < -1);
+
+            if (limit <= 0)
+            {
+                Debug.LogError("Limit reached while trying to pick random value");
+            }
 
             unpickedValues.RemoveAt(newIndex);
             return Value = newValue;
@@ -46,13 +55,21 @@ namespace Marx.Utilities
             T newValue;
             int newIndex;
 
+            int limit = 999;
+            
             do
             {
                 newIndex = UnityEngine.Random.Range(0, unpickedValues.Count);
                 newValue = unpickedValues[newIndex];
             }
-            while (newValue.Equals(Value) || !Condition(newValue));
+            while (newValue.Equals(Value) || !Condition(newValue) || --limit < -1);
 
+            
+            if (limit <= 0)
+            {
+                Debug.LogError("Limit reached while trying to pick random value");
+            }
+            
             unpickedValues.RemoveAt(newIndex);
             return Value = newValue;
         }
