@@ -51,6 +51,7 @@ namespace Marx.Utilities
             foreach (T obj in Resources.LoadAll<T>(""))
             {
                 if (lookupCache.TryAdd(obj.Guid, obj)) continue;
+                if(lookupCache[obj.Guid] == obj) continue;
                 
                 Debug.LogError($"Multiple objects sharing same GUID: {obj.Guid.ToString()}");
                 Debug.LogError($"Object 1: {obj.name}", obj);
