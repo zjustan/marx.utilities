@@ -4,6 +4,10 @@ using UnityEngine;
 namespace Marx.Utilities
 {
 
+    /// <summary>
+    /// Represents an abstract base class for all factories.
+    /// A Factory is responsible for creating objects or instances of a specific type.
+    /// </summary>
     public abstract class Factory : ScriptableObject
     {
         public int Index { get; set; }
@@ -12,12 +16,19 @@ namespace Marx.Utilities
         public abstract Type FactoryType { get; }
     }
 
-    public abstract class Factory<T> : Factory, IFactory<T>
-    {
+    /// <summary>
+    /// Represents an abstract base class for all factories.
+    /// Handles the creation of objects and managing their lifecycle.
+    /// </summary>
+    public abstract class Factory<T> : Factory, IFactory<T> {
         public abstract T Construct();
         public sealed override Type FactoryType => typeof(T);
     }
 
+    /// <summary>
+    /// Defines a generic contract for factories responsible for creating objects or instances.
+    /// Serves as a base interface for more specific factory implementations.
+    /// </summary>
     public interface IFactory { }
 
     public interface IFactory<out TOut> : IFactory

@@ -4,9 +4,13 @@ using System.Collections.Generic;
 namespace Marx.Utilities
 {
 
+    /// <summary>
+    /// A collection that provides functionality for constructing and managing multiple objects,
+    /// while also facilitating cleanup operations.
+    /// </summary>
     public class FactoryCollection : IEnumerable<object>
     {
-        public List<object> objects = new();
+        private List<object> objects = new();
 
         public IEnumerator<object> GetEnumerator()
         {

@@ -7,6 +7,11 @@ using UnityEngine;
 namespace Marx.Utilities
 {
 
+    /// <summary>
+    /// Provides utilities for managing factories and factory collections. This static class supports object instantiation,
+    /// managing factory collections, and resolving dependencies for constructors dynamically. It also integrates with
+    /// service registration via the Service attribute.
+    /// </summary>
     [Service]
     public static class Factories
     {

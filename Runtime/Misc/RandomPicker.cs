@@ -5,8 +5,13 @@ using UnityEngine;
 
 namespace Marx.Utilities
 {
-    public class RandomPicker<T> where T : IEquatable<T>
-    {
+    /// <summary>
+    /// Represents a utility class used to pick random items from a collection of values.
+    /// The collection supports ensuring values are not repeated until all items have been picked.
+    /// </summary>
+    /// <typeparam name="T">The type of item stored in the collection. Must implement IEquatable&lt;T&gt;.</typeparam>
+    public class RandomPicker<T> where T : IEquatable<T> {
+        
         private readonly IEnumerable<T> source;
 
         private readonly List<T> unpickedValues;
@@ -17,11 +22,21 @@ namespace Marx.Utilities
             unpickedValues = new List<T>(values.Count());
             Fill();
         }
-
+        
+        /// <summary>
+        /// Gets the most recently picked value from the collection.
+        /// The value is updated every time a new item is picked using the <see cref="Pick"/> method.
+        /// </summary>
         public T Value { get; private set; }
 
-        public T Pick()
-        {
+        /// <summary>
+        /// Picks a random item from the collection, ensuring it does not repeat the most recently picked item.
+        /// Refills the collection with all items when all have been picked.
+        /// </summary>
+        /// <returns>
+        /// A randomly selected item of type T from the collection.
+        /// </returns>
+        public T Pick() {
             if (unpickedValues.Count == 0)
                 Fill();
 
@@ -47,8 +62,18 @@ namespace Marx.Utilities
             return Value = newValue;
         }
 
-        public T PickWhere(Func<T, bool> Condition)
-        {
+        /// <summary>
+        /// Picks a random item from the collection that satisfies the specified condition,
+        /// ensuring it does not repeat the most recently picked item.
+        /// Refills the collection with all items when all have been picked or no items satisfy the condition.
+        /// </summary>
+        /// <param name="Condition">
+        /// A function defining the condition that an item must satisfy to be selected.
+        /// </param>
+        /// <returns>
+        /// A randomly selected item of type T from the collection that meets the specified condition.
+        /// </returns>
+        public T PickWhere(Func<T, bool> Condition) {
             if (unpickedValues.Count == 0 || !unpickedValues.Any(Condition))
                 Fill();
 
@@ -74,16 +99,27 @@ namespace Marx.Utilities
             return Value = newValue;
         }
 
-        public IEnumerable<T> PickRange(int minigameCount)
-        {
-            for (int i = 0; i < minigameCount; i++)
-            {
+        /// <summary>
+        /// Picks a specified number of random items from the collection, ensuring they do not repeat the most recently picked items.
+        /// Refills the collection with all items when all have been picked.
+        /// </summary>
+        /// <param name="count">
+        /// The number of random items to pick from the collection.
+        /// </param>
+        /// <returns>
+        /// A collection of randomly selected items of type T.
+        /// </returns>
+        public IEnumerable<T> PickRange(int count) {
+            for (int i = 0; i < count; i++) {
                 yield return Pick();
             }
         }
 
-        public void Remove(T item)
-        {
+        /// <summary>
+        /// Removes the specified item from the collection of unpicked values.
+        /// </summary>
+        /// <param name="item">The item to be removed from the collection.</param>
+        public void Remove(T item) {
             unpickedValues.Remove(item);
         }
 

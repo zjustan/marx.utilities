@@ -2,6 +2,10 @@ using UnityEngine;
 
 namespace Marx.Utilities
 {
+    /// <summary>
+    /// A MonoBehaviour class that adjusts the GameObject's rotation
+    /// to always face a specific camera or target.
+    /// </summary>
     public class LookAtCamera : MonoBehaviour
     {
         [SerializeField] private Transform objectToRotate;
