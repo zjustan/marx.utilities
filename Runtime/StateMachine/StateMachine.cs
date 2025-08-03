@@ -136,7 +136,7 @@ namespace Marx.Utilities
                 deactivatingState.Deactivate();
         }
         
-        private TState GetState<TState>() where TState : State
+        protected TState GetState<TState>() where TState : State
         {
             if (TryGetStateFromCache(out TState state)) return state;
             if (!gameObject.TryGetComponentInChildren(out state))
